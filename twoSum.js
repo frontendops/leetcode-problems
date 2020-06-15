@@ -12,15 +12,18 @@ return [0, 1].
 */
 
 var twoSum = function(nums, target) {
-    let res
-    nums.forEach((_, i) => {
-        nums.forEach((_, j) => {
-            if (i !== j && nums[i] + nums[j] === target) {
-                res = [j, i]
-            }
-        })
-    })
-    return res
+    let hash = new Map()
+    for (i = 0; i < nums.length; i++) {
+      hash.set(nums[i], i)
+    }
+  
+     for (i = 0; i < nums.length; i++) {
+       let complement = target - nums[i]
+  
+        if (hash.has(complement) && i !== hash.get(complement)) {
+           return [i, hash.get(complement)]
+        }
+    }
 };
 
 console.log(twoSum([2,7,11,15], 9))
